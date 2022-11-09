@@ -29,10 +29,11 @@ class MyHomePage extends StatefulWidget {
   State<MyHomePage> createState() => _MyHomePageState();
 }
 
-class _MyHomePageState extends State<MyHomePage> {
+class _MyHomePageState extends State<MyHomePage> with WidgetsBindingObserver {
   int _counter = 0;
   @override
   void initState() {
+    WidgetsBinding.instance.addObserver(this);
     print("initstate");
     // TODO: implement initState
     super.initState();
@@ -64,13 +65,20 @@ class _MyHomePageState extends State<MyHomePage> {
     // TODO: implement dispose
     print("dispose()");
 
-    
     super.dispose();
   }
 
   void _incrementCounter() {
-    Navigator.pushReplacement(
-        context, MaterialPageRoute(builder: (c) => Second()));
+    Navigator.pushReplacement(context, MaterialPageRoute(builder: (c) => Second()));
+  }
+
+  @override
+  void didChangeAppLifecycleState(AppLifecycleState state) {
+    // TODO: implement didChangeAppLifecycleState
+    print("----------------------------------------------------------------");
+    print(state);
+    print("----------------------------------------------------------------");
+    super.didChangeAppLifecycleState(state);
   }
 
   @override
